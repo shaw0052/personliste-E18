@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>personliste</title>
+</head>
+
+<body>
+
+    <section id="personcontainer">
+        <template id="personliste-template">
+            <article>
+                <h2 id="data-navn"></h2>
+                <p id="data-github"></p>
+                <p id="data-website"></p>
+                <p id="data-mail"></p>
+                <p id="data-adresse"></p>
+                <p id="data-alder"></p>
+                <p id="data-civilstatus"></p>
+                <p id="data-tlf"></p>
+                <p id="data-facebook"></p>
+                <p id="data-hobby"></p>
+                <p id="data-sex"></p>
+                <p id="data-billede"></p>
+            </article>
+        </template>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", hentJson);
+        let personer;
+        async function hentJson() {
+            let myJson = await fetch("personliste.json");
+            personer = await myJson.json();
+            console.log(personer);
+            visPersoner();
+        }
+
+        function visPersoner() {
+            let modtager = document.querySelector("#personcontainer");
+            let temp = document.querySelector("#personliste-template");
+            // løb personlisten igennem og lav en klon
+            personer.forEach(person => {
+                let klon = temp.cloneNode(true).content;
+                klon.querySelector("h2").textContent = person.navn;
+                klon.querySelector("#data-github").textContent = person.github;
+                klon.querySelector("#data-website").textContent = person.website;
+                klon.querySelector("#data-mail").textContent = person.mail;
+                klon.querySelector("#data-adresse").textContent = person.adresse;
+                klon.querySelector("#data-alder").textContent = person.alder;
+                klon.querySelector("#data-civilstatus").textContent = person.civilstatus;
+                klon.querySelector("#data-tlf").textContent = person.tlf;
+                klon.querySelector("#data-facebook").textContent = person.facebook;
+                klon.querySelector("#data-hobby").textContent = person.hobby;
+                klon.querySelector("#data-sex").textContent = person.sex;
+                klon.querySelector("#data-billede").textContent = person.billeder;
+                modtager.appendChild(klon);
+            })
+        }
+
+    </script>
+
+</body>
+
+</html>
