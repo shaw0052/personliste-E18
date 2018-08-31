@@ -5,6 +5,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>personliste</title>
+
+    <style>
+        img {
+            width: 200px;
+        }
+    </style>
 </head>
 
 <body>
@@ -23,7 +29,8 @@
                 <p id="data-facebook"></p>
                 <p id="data-hobby"></p>
                 <p id="data-sex"></p>
-                <p id="data-billede"></p>
+                <img src="" alt=""><br>
+
             </article>
         </template>
     </section>
@@ -45,6 +52,7 @@
             personer.forEach(person => {
                 let klon = temp.cloneNode(true).content;
                 klon.querySelector("h2").textContent = person.navn;
+
                 klon.querySelector("#data-github").textContent = person.github;
                 klon.querySelector("#data-website").textContent = person.website;
                 klon.querySelector("#data-mail").textContent = person.mail;
@@ -55,11 +63,10 @@
                 klon.querySelector("#data-facebook").textContent = person.facebook;
                 klon.querySelector("#data-hobby").textContent = person.hobby;
                 klon.querySelector("#data-sex").textContent = person.sex;
-                klon.querySelector("#data-billede").textContent = person.billeder;
+                klon.querySelector("img").src = person.billede;
                 modtager.appendChild(klon);
             })
         }
-
     </script>
 
 </body>
